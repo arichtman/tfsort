@@ -13,10 +13,13 @@
 
 let
   goEnv = pkgs.mkGoEnv { pwd = ./.; };
+  builtPackage = pkgs.callPackage ./. {};
 in
 pkgs.mkShell {
   packages = [
     goEnv
+    # TODO: unsure if this is lousy for go development or what
+    builtPackage
     pkgs.gomod2nix
     pkgs.terraform
   ];
